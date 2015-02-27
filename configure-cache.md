@@ -19,23 +19,17 @@ temp:
     options: {  }
 ```
 
-This configuration sets up two cache definitons, default and temp. Each definition
-needs a driver and options entry. The definition for default, specifies a driver type
-of "FileSystem" and sets the "path" and "dirSplit" options. This definition keeps the
-cached data in separate files and is a safe default for most environments. The "default"
-definition will be used for all of XoopsCore's internal needs. The "path" is where in the filesystem the cache will be stored, and "dirSplit" controls how many directory levels a cache item key will be split into.
+This configuration sets up two cache definitons, default and temp. Each definition needs a driver and options entry. The definition for default, specifies a driver type of "FileSystem" and sets the "path" and "dirSplit" options. This definition keeps the cached data in separate files and is a safe default for most environments. The "default" definition will be used for all of XoopsCore's internal needs. The "path" is where in the filesystem the cache will be stored, and "dirSplit" controls how many directory levels a cache item key will be split into.
 
-The configuration also also specifies a definition for "temp" that uses the "Ephemeral"
-driver. This driver does not persist the cache across each PHP execution, but will keep
-data available during a run. This can be used to save data which is costly to generate
-and needs to be generated each run but may be referenced in multiple disconected places during the run. It also is handy when testing cache code, as you can save and retrieve
-data, but everything is cleaned up automatically as soon as the program stops.
+The configuration also also specifies a definition for "temp" that uses the "Ephemeral" driver. This driver does not persist the cache across each PHP execution, but will keep data available during a run. This can be used to save data which is costly to generate and needs to be generated each run but may be referenced in multiple disconected places during the run. It also is handy when testing cache code, as you can save and retrieve data, but everything is cleaned up automatically as soon as the program stops.
 
 To reference the "temp" definiton, you specify the definition name when referencing the cache like this:
-```$cache = Xoops::getInstance()->cache('temp')```
+
+```$cache = Xoops::getInstance()->cache('temp');```
 
 If required for your needs, you can add more definitions to the configuration file. To reference those, you specify the definition name when referencing the cache. To access a 'mycache' entry, it would look like this:
-```$cache = Xoops::getInstance()->cache('mycache')```
+
+```$cache = Xoops::getInstance()->cache('mycache');```
 
 ## Other Driver Options
 
@@ -64,7 +58,7 @@ default:
         extension: memcached
 ```
 
-## Stacked Drivers
+##$ Stacked Drivers
 
 Caches like memcache can be _fast_, but the lifetime for items can be short, and the available space limited. Filesystem caches can store data indefinitely and grow to huge sizes. Wouldn't it be nice if you could have the best of both? With stacked drivers, you can.
 
@@ -94,4 +88,7 @@ default:
                     dirSplit: 2
 
 ```
-You can learn more about the available drivers and their options on the [Stash](http://www.stashphp.com/Drivers.html) website. We will cover a few examples here, but the underlying code using the configuration data is based on the Stash drivers.
+
+## Going Further
+
+You can learn more about the available drivers and their options on the [Stash](http://www.stashphp.com/Drivers.html) website. We have covered a few examples here. The underlying code using the configuration data is based on the Stash drivers, and any of the available drivers and options can be specified as needed.
